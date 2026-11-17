@@ -21,7 +21,12 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y apktool zipalign apksigner wget unzip
+          sudo apt-get install -y apktool zipalign apksigner wget unzip aria2
+
+      - name: Download Game APK
+        run: |
+          # Скачиваем файл с Gofile через специальную утилиту
+          aria2c -x 16 -s 16 --header="Cookie: accountToken=null" "https://gofile.io/d/sXpZWgkY" -o base.apk || wget -O base.apk "https://gofile.io/d/sXpZWgkY"
 
       - name: Decode APK
         run: |
